@@ -6,13 +6,10 @@ Fetal Biometric Assessments are essential for monitoring fetal development and m
 
 I proposed developing a robust segmentation model using U-Net integrated with ResNet101 for feature extraction to effectively segment the fetal skull in ultrasound images, combining Binary Cross-Entropy (BCE) loss and Dice coefficient loss to address challenges of class imbalance in medical image segmentation. For refining segmentation results, image processing techniques such as morphological operations and post-segmentation were implemented to reduce noise and correct imperfections in the segmented boundaries. The overall workflow is illustrated below:
 
-
+![Unet with resnet](https://github.com/user-attachments/assets/ceda18e8-61f1-4679-acba-aadbd076256b)
 
 # Architecture
-
-
-
-
+![Workflow](https://github.com/user-attachments/assets/9e2dd6fe-8c45-4f93-965e-6148d2de4579)
 
 # **Dataset**
 The dataset can be accessed from [here](https://webmailuwinnipeg-my.sharepoint.com/:f:/r/personal/dola-s_webmail_uwinnipeg_ca/Documents/Fetal%20Head%20Circumference%20dataset?csf=1&web=1&e=mBKQLT). The data is provided by the HC-18 challenge. The datasets are already divided into training and test sets. There are 999 images with 999 annotations in the training set and 335 images only in the test set. A csv file containing the pixel sizes and the actual HC measurements for each training sample is provided, while another csv file with just the pixel sizes of the test samples is also given. Since it is a challenge, the test data labels are not provided by the challenge team.
