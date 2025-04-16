@@ -71,7 +71,7 @@ Moving on, the ```Preprocessing - flipping, resizing, rotation, intensity based 
     + ```Activation Function```: A sigmoid activation function applied to the final convolutional output to map the logits to probabilities.
 3. For Loss Function, a combination of Dice Loss and Binary Cross-Entropy was used.
 
-Random images with the predicted segmented overlay are generated during training, and kept in overlay_images directory.
+5 fold validation was performed during training. Random images with the predicted segmented overlay are generated during training, and kept in overlay_images directory.
 
 # Model
 The model was saved as ```unet_resnet101_model.pth```. The saved model can be found [here](https://webmailuwinnipeg-my.sharepoint.com/:f:/r/personal/dola-s_webmail_uwinnipeg_ca/Documents/Fetal%20Head%20Circumference%20dataset?csf=1&web=1&e=mBKQLT).
