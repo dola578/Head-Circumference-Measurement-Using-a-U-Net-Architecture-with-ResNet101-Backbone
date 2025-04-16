@@ -6,10 +6,11 @@ Fetal Biometric Assessments are essential for monitoring fetal development and m
 
 I proposed developing a robust segmentation model using U-Net integrated with ResNet101 for feature extraction to effectively segment the fetal skull in ultrasound images, combining Binary Cross-Entropy (BCE) loss and Dice coefficient loss to address challenges of class imbalance in medical image segmentation. For refining segmentation results, image processing techniques such as morphological operations and post-segmentation were implemented to reduce noise and correct imperfections in the segmented boundaries. The overall workflow is illustrated below:
 
-![Unet with resnet](https://github.com/user-attachments/assets/ceda18e8-61f1-4679-acba-aadbd076256b)
+![Workflow](https://github.com/user-attachments/assets/9e2dd6fe-8c45-4f93-965e-6148d2de4579)
 
 # Architecture
-![Workflow](https://github.com/user-attachments/assets/9e2dd6fe-8c45-4f93-965e-6148d2de4579)
+
+![Unet with Resnet101](https://github.com/user-attachments/assets/cc11961d-9d76-4005-8bd9-dc0e92a41510)
 
 # **Dataset**
 The dataset can be accessed from [here](https://webmailuwinnipeg-my.sharepoint.com/:f:/r/personal/dola-s_webmail_uwinnipeg_ca/Documents/Fetal%20Head%20Circumference%20dataset?csf=1&web=1&e=mBKQLT). The data is provided by the HC-18 challenge. The datasets are already divided into training and test sets. There are 999 images with 999 annotations in the training set and 335 images only in the test set. A csv file containing the pixel sizes and the actual HC measurements for each training sample is provided, while another csv file with just the pixel sizes of the test samples is also given. Since it is a challenge, the test data labels are not provided by the challenge team.
@@ -41,6 +42,7 @@ opencv-python
 Both the training data and the testing data were denoised using wavelet transform. The ```Denoising_all_data.ipynb``` can be run twice - once with train data as input, and again with test data as input. 2 new directories named **denoised_train_set** (without annotations) and **denoised_test_set** will be created.
 
 After that, the annotations of the training data were filled/masked using Flood Fill algorithm. The ```masking_annotations.ipynb``` can be run and the masked annotations will be stored in a directory named ```masked_annotations.```
+![annotations (1)](https://github.com/user-attachments/assets/3c5d9e1d-386e-4df4-bf0b-291ac651c7ec)
 
 Moving on, the ```Preprocessing - flipping, resizing, rotation, intensity based transformation``` section from ```HC.ipynb``` can be run to perform flipping, resizing (256x256), rotation and some intensity based transformation on the training data.
 
@@ -81,12 +83,13 @@ The model was then run on the test data for getting segmented test data images. 
 
 # Evaluating segmentation
 For evaluating the segmentation, DSC and HD were calculated with filled annotations as the ground truth. The ```DSC (Dice Similarity Coefficient) with filled annotations as ground truth``` section of ```HC.ipynb``` can be run to get the DSC and HD values.
+![segmentation](https://github.com/user-attachments/assets/299e54be-6e16-4980-9194-31283f101d88)
 
 # Post Segmentations
 Morphological opening closing and canny edge detector was used for post segmentation steps. The ```Morphological Opening and Closing + Canny edge Detector``` section from ```HC.ipynb``` can be run which will store the segmented edges in **output_edges.**
 
-# Ellipse fiting
-Ellipse fitting was used on the edges to get the HC parametes, from which HC can be calculated. fitEllipse from OpenCV was used here. The ```Ellipse fiting``` section of the ```HC.ipynb``` can be run, which will generate a csv file with the HC parameters (c_x, c_y, semi_a, semi_b, angle).
+# Ellipse fitting
+Ellipse fitting was used on the edges to get the HC parameters, from which HC can be calculated. fitEllipse from OpenCV was used here. The ```Ellipse fitting``` section of the ```HC.ipynb``` can be run, which will generate a csv file with the HC parameters (c_x, c_y, semi_a, semi_b, angle).
 
 # Calculating Head Circumference (HC)
 I used Ramanujan's approximation formula for calculating HC. The code block sections under ```Calculating HC``` can be run to get the predicted calculations.
