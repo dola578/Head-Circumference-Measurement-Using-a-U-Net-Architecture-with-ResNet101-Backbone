@@ -14,6 +14,9 @@ I proposed developing a robust segmentation model using U-Net integrated with Re
 # **Dataset**
 The dataset can be accessed from [here](https://webmailuwinnipeg-my.sharepoint.com/:f:/r/personal/dola-s_webmail_uwinnipeg_ca/Documents/Fetal%20Head%20Circumference%20dataset?csf=1&web=1&e=mBKQLT). The data is provided by the HC-18 challenge. The datasets are already divided into training and test sets. There are 999 images with 999 annotations in the training set and 335 images only in the test set. A csv file containing the pixel sizes and the actual HC measurements for each training sample is provided, while another csv file with just the pixel sizes of the test samples is also given. Since it is a challenge, the test data labels are not provided by the challenge team.
 
+> [!NOTE]
+>The challenge team is currently not accepting submissions as they are facing problems from their end and have not fixed the issue yet. Therefore, from my 999 training data, I kept 749 images as training data and 250 images as test data.
+
 # Library Requirements
 > [!NOTE]
 >A specific version of the typing_extensions is required to avoid errors in the code. This can be run for the typing_extensions:
@@ -24,6 +27,9 @@ The dataset can be accessed from [here](https://webmailuwinnipeg-my.sharepoint.c
 >```
 >!pip install typing_extensions==4.7.1 --upgrade
 >```
+>If it still gives some errors, then this line can be run before running the above ones:
+>```!pip install typing_extensions>=4.3 --upgrade```
+
 For the other libraries given below, the latest version will suffice.
 ```
 torchvision
@@ -36,7 +42,7 @@ Both the training data and the testing data were denoised using wavelet transfor
 
 After that, the annotations of the training data were filled/masked using Flood Fill algorithm. The ```masking_annotations.ipynb``` can be run and the masked annotations will be stored in a directory named ```masked_annotations.```
 
-Moving on, the ```Preprocessing - flipping, resizing, rotation, gamma correction``` section from ```HC.ipynb``` can be run to perform flipping, resizing, rotation and gamma correction on the training data.
+Moving on, the ```Preprocessing - flipping, resizing, rotation, intensity based transformation``` section from ```HC.ipynb``` can be run to perform flipping, resizing (256x256), rotation and some intensity based transformation on the training data.
 
 # Training
 1. The ```Training Loop``` section in ```HC.ipynb``` can be run for training the model. Run the ```Unet with resnet101 as backbone``` and the ```Dice loss + Binary cross-entropy loss``` section in the same python file first. These are the parameters used in the training loop:
@@ -65,11 +71,16 @@ Moving on, the ```Preprocessing - flipping, resizing, rotation, gamma correction
     + ```Activation Function```: A sigmoid activation function applied to the final convolutional output to map the logits to probabilities.
 3. For Loss Function, a combination of Dice Loss and Binary Cross-Entropy was used.
 
+Random images with the predicted segmented overlay are generated during training, and kept in overlay_images directory.
+
 # Model
 The model was saved as ```unet_resnet101_model.pth```. The saved model can be found [here](https://webmailuwinnipeg-my.sharepoint.com/:f:/r/personal/dola-s_webmail_uwinnipeg_ca/Documents/Fetal%20Head%20Circumference%20dataset?csf=1&web=1&e=mBKQLT).
 
 # Test
 The model was then run on the test data for getting segmented test data images. The ```Running Model on test data``` section of ```HC.ipynb``` can be run, which will store the segmented images in **output_segmentations** directory. 
+
+# Evaluating segmentation with DSC (Dice Similarity Coefficient) and HD (Hausdorff Distance) with filled annotations as ground truth
+For evaluating the segmentation, DSC and HD were calculated with filled annotations as the ground truth. The ```DSC (Dice Similarity Coefficient) with filled annotations as ground truth``` section of ```HC.ipynb``` can be run to get the DSC and HD values.
 
 # Post Segmentations
 Morphological opening closing and canny edge detector was used for post segmentation steps. The ```Morphological Opening and Closing + Canny edge Detector``` section from ```HC.ipynb``` can be run which will store the segmented edges in **output_edges.**
@@ -77,8 +88,10 @@ Morphological opening closing and canny edge detector was used for post segmenta
 # Ellipse fiting
 Ellipse fitting was used on the edges to get the HC parametes, from which HC can be calculated. fitEllipse from OpenCV was used here. The ```Ellipse fiting``` section of the ```HC.ipynb``` can be run, which will generate a csv file with the HC parameters (c_x, c_y, semi_a, semi_b, angle).
 
-# Evaluation
-Currently under evaluation under submissions in the challenge.
+# Calculating Head Circumference (HC)
+I used Ramanujan's approximation formula for calculating HC. The code block sections under ```Calculating HC``` can be run to get the predicted calculations.
 
+# Evaluating HC (Head Circumference)
+For evaluation, Mean Absolute Error (MAE), Mean Squared Error (MSE), Root Mean Squared Error (RMSE), R-squared (R²), Mean Difference (DF) and Mean Absolute Difference (ADF) were used. The code block sections under ```Evaluation``` can be run to get the evaluation metrics values.
 
 
