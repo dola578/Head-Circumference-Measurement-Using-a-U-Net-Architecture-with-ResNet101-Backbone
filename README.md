@@ -94,6 +94,12 @@ Ellipse fitting was used on the edges to get the HC parameters, from which HC ca
 # Calculating Head Circumference (HC)
 I used Ramanujan's approximation formula for calculating HC. The code block sections under ```Calculating HC``` can be run to get the predicted calculations.
 
+**HC = π × [ 3(a + b) − √((3a + b)(a + 3b)) ]**
+
+Where:
+- *a* = semi-major axis (in mm)
+- *b* = semi-minor axis (in mm)
+
 # Evaluating HC (Head Circumference)
 For evaluation, Mean Absolute Error (MAE), Mean Squared Error (MSE), Root Mean Squared Error (RMSE), R-squared (R²), Mean Difference (DF) and Mean Absolute Difference (ADF) were used. The code block sections under ```Evaluation``` can be run to get the evaluation metrics values.
 
