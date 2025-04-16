@@ -79,7 +79,7 @@ The model was saved as ```unet_resnet101_model.pth```. The saved model can be fo
 # Test
 The model was then run on the test data for getting segmented test data images. The ```Running Model on test data``` section of ```HC.ipynb``` can be run, which will store the segmented images in **output_segmentations** directory. 
 
-# Evaluating segmentation with DSC (Dice Similarity Coefficient) and HD (Hausdorff Distance) with filled annotations as ground truth
+# Evaluating segmentation
 For evaluating the segmentation, DSC and HD were calculated with filled annotations as the ground truth. The ```DSC (Dice Similarity Coefficient) with filled annotations as ground truth``` section of ```HC.ipynb``` can be run to get the DSC and HD values.
 
 # Post Segmentations
