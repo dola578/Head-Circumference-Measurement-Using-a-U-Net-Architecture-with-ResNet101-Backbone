@@ -39,11 +39,14 @@ opencv-python
 ```
 
 # Preprocessing
+## Denoising using Wavelet Transform
 Both the training data and the testing data were denoised using wavelet transform. The ```Denoising_all_data.ipynb``` can be run twice - once with train data as input, and again with test data as input. 2 new directories named **denoised_train_set** (without annotations) and **denoised_test_set** will be created.
 
+## Masking Annotations
 After that, the annotations of the training data were filled/masked using Flood Fill algorithm. The ```masking_annotations.ipynb``` can be run and the masked annotations will be stored in a directory named ```masked_annotations.```
 ![annotations (1)](https://github.com/user-attachments/assets/3c5d9e1d-386e-4df4-bf0b-291ac651c7ec)
 
+## Flipping, Resizing, Rotation, Intensity-based Transformation
 Moving on, the ```Preprocessing - flipping, resizing, rotation, intensity based transformation``` section from ```HC.ipynb``` can be run to perform flipping, resizing (256x256), rotation and some intensity based transformation on the training data.
 
 # Training
