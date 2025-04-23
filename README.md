@@ -79,7 +79,7 @@ Moving on, the ```Preprocessing - flipping, resizing, rotation, intensity based 
 5 fold validation was performed during training. Random images with the predicted segmented overlay are generated during training, and kept in overlay_images directory.
 
 # Model
-The model was saved as ```unet_resnet101_model.pth```. The saved model can be found [here](https://webmailuwinnipeg-my.sharepoint.com/:f:/r/personal/dola-s_webmail_uwinnipeg_ca/Documents/Fetal%20Head%20Circumference%20dataset?csf=1&web=1&e=mBKQLT).
+The model was saved as ```best_unet_resnet101_model.pth```. The saved model can be found [here](https://webmailuwinnipeg-my.sharepoint.com/:f:/r/personal/dola-s_webmail_uwinnipeg_ca/Documents/Fetal%20Head%20Circumference%20dataset?csf=1&web=1&e=mBKQLT).
 
 # Test
 The model was then run on the test data for getting segmented test data images. The ```Running Model on test data``` section of ```HC.ipynb``` can be run, which will store the segmented images in **output_segmentations** directory. 
