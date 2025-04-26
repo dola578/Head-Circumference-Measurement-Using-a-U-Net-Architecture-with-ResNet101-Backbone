@@ -30,6 +30,14 @@ The dataset can be accessed from [here](https://webmailuwinnipeg-my.sharepoint.c
 >```
 >If it still gives some errors, then this line can be run before running the above ones:
 >```!pip install typing_extensions>=4.3 --upgrade```
+> 
+> In case of numpy version related errors, run the following commands:
+> ```
+> !pip uninstall numpy opencv-python -y
+> !pip install --upgrade "numpy==1.23.5"
+> !pip install --upgrade "scikit-image<0.25"
+> !pip install --no-deps opencv-python
+>```
 
 For the other libraries given below, the latest version will suffice.
 ```
